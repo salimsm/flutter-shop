@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_10/src/pages/login_page.dart';
-
+import 'package:flutter_project_10/src/provider/cartProvider/cart_provider.dart';
+import 'package:provider/provider.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
+      child: const MyApp(),
+    ),);
 }
 
 class MyApp extends StatelessWidget {

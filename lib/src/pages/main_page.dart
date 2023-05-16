@@ -16,6 +16,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,6 @@ class _MainPageState extends State<MainPage> {
 FutureBuilder _body() {
   final apiService =
       RestClient(Dio(BaseOptions(contentType: "application/json")));
-
   return FutureBuilder(
       future: apiService.getProductList(),
       builder: (context, snapshot) {
