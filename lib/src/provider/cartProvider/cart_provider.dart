@@ -8,25 +8,38 @@ class CartProvider extends ChangeNotifier {
 
   List<CartProduct> get productCartList => _productCartList;
 
-  int get itemNumber => _totalQuantity;
+  int get totalQuantity => _totalQuantity;
+  double get totalPrice => _totalPrice;
 
-  void addProductToCart(CartProduct product) {
-    bool doesContain = _productCartList.contains(product.product.id);
+  void addProductToCart(CartProduct product, [int? id]) {
+    _productCartList.add(product);
 
-    if (!doesContain) {
-      _productCartList.add(product);
-      _totalPrice += product.itemTotalPrice;
-      _totalQuantity += product.quantity;
-      notifyListeners();
-    }
-
+    _totalPrice += (product.price * product.quantity);
+    _totalQuantity += product.quantity;
+    notifyListeners();
   }
 
-  // void changeQuantity(int id){
-  //   _productCartList = _productCartList.map((item){
-  //     if(item.product.id ===id){
-  //       return
-  //     }
-  //   }
-  // }
+  void changeQuantity(int id, String description, int index) {
+    // _productCartList.indexWhere((item) => item.product.id == id);
+    //   CartProduct selectedProduct = _productCartList[productIndex];
+
+    if (description == 'increase') {
+      _totalQuantity += 1;
+      _totalPrice += _productCartList[index].price;
+      _productCartList[index].quantity++;
+    } else {
+      _totalQuantity -= 1;
+      _totalPrice -= _productCartList[index].price;
+
+      _productCartList[index].quantity--;
+    }
+    notifyListeners();
+  }
+
+  void clearCartList() {
+    _productCartList = [];
+    _totalPrice = 0.0;
+    _totalQuantity = 0;
+    notifyListeners();
+  }
 }

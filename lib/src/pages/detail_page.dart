@@ -16,9 +16,14 @@ class DetailPage extends StatelessWidget {
   DetailPage(this.product, {Key? key}) : super(key: key);
   void addToCart() {
     CartProduct newCartProduct = CartProduct(
-        product: product,
+        // product:product,
+        id:product.id,
+        title:product.title,
+        price:product.price,
         quantity: _quantity,
-        itemTotalPrice: _quantity * product.price);
+        image: product.image,
+        // itemTotalPrice: _quantity * product.price
+        );
     _cartProvider.addProductToCart(newCartProduct);
   }
 
@@ -90,7 +95,7 @@ class DetailPage extends StatelessWidget {
                   descriptionTitle: AppString.description,
                   descriptionBody: product.description,
                 ),
-                QuantityCounter(getQuantity: (quant) {
+                QuantityCounter(getQuantity: (quant,description) {
                   _quantity = quant;
                 }),
                 CustomButton(
