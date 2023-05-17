@@ -92,6 +92,7 @@ class CartCard extends StatelessWidget {
                       },
                       quantity: product.quantity,index:index),
                   Text('Price: ${product.price.toString()}',style:TextStyle(fontSize: 17,fontWeight:FontWeight.bold)),
+                  Divider(),
                   Consumer<CartProvider>(
                     builder: (BuildContext context, value, Widget? child) {
                       return Text('Total: ${value.productCartList[index].price*value.productCartList[index].quantity}',style: TextStyle(fontSize: 17,fontWeight:FontWeight.bold),);
