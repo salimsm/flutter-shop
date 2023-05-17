@@ -84,7 +84,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   CustomButton(
                     onPress: () {
                       if (_registerFormKey.currentState!.validate()) {
-                        print('woooooooooooooooooooooooo');
                       }
                     },
                     text: AppString.register,

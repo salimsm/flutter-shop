@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_10/src/widgets/cart_page_quantity_counter.dart';
 import 'package:provider/provider.dart';
-
 import '../common/common.dart';
 import '../const/const.dart';
 import '../models/models.dart';
@@ -9,6 +8,7 @@ import '../provider/cartProvider/cart_provider.dart';
 import '../utils/utils.dart';
 import '../widgets/widgets.dart';
 
+// ignore: must_be_immutable
 class DetailPage extends StatelessWidget {
   final Product product;
   late CartProvider _cartProvider;
@@ -17,13 +17,11 @@ class DetailPage extends StatelessWidget {
   DetailPage(this.product, {Key? key}) : super(key: key);
   void addToCart(BuildContext context) {
     CartProduct newCartProduct = CartProduct(
-      // product:product,
       id: product.id,
       title: product.title,
       price: product.price,
       quantity: _quantity,
       image: product.image,
-      // itemTotalPrice: _quantity * product.price
     );
     _cartProvider.addProductToCart(newCartProduct);
     navigateBackTo(context);
@@ -109,7 +107,7 @@ class DetailPage extends StatelessWidget {
                             _quantity = quant;
                           }),
                           CustomButton(
-                            onPress:()=> addToCart(context),
+                            onPress: () => addToCart(context),
                             icon: Icons.shopping_cart,
                             text: AppString.addToCart,
                             padding: const EdgeInsets.symmetric(vertical: 8),

@@ -7,6 +7,7 @@ class ProductCart extends StatelessWidget {
   final String productName;
   final double productPrice;
 
+  // ignore: use_key_in_widget_constructors
   const ProductCart(
       {Key? key,
       this.imageUrl,
@@ -64,7 +65,7 @@ class ProductCart extends StatelessWidget {
                 ),
                 GestureDetector(
                     onTap: () {
-                      print('added');
+                      //print('added');
                     },
                     child: Container(
                       padding: const EdgeInsets.all(8),
