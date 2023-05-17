@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../provider/cartProvider/cart_provider.dart';
 import '../widgets/cart_page_quantity_counter.dart';
-import '../widgets/quantity_counter.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    final CartProvider _cartProvider =
+    final CartProvider cartProvider =
         Provider.of<CartProvider>(context, listen: false);
     return Scaffold(
       body: Column(
@@ -29,8 +28,8 @@ class _CartPageState extends State<CartPage> {
               builder: (BuildContext context, value, Widget? child) {
                 return ListView.builder(
                   itemBuilder: (contenxt, index) {
-                    CartProduct _product = _cartProvider.productCartList[index];
-                    return CartCard(product: _product,index:index);
+                    CartProduct product = cartProvider.productCartList[index];
+                    return CartCard(product: product,index:index);
                   },
                   itemCount: value.productCartList.length,
                 );
@@ -46,7 +45,7 @@ class _CartPageState extends State<CartPage> {
                 },
               ),
               CustomButton(
-                onPress: () => {_cartProvider.clearCartList()},
+                onPress: () => {cartProvider.clearCartList()},
                 text: 'Checkout',
                 width: 200,
               ),
@@ -68,8 +67,6 @@ class CartCard extends StatelessWidget {
     final CartProvider _cartProvider =
         Provider.of<CartProvider>(context, listen: false);
     return Card(
-      // margin: EdgeInsets.symmetric(horizontal:20),
-      // color: Colors.blueGrey,
       child: Row(
         children: [
           Image.network(product.image,
@@ -84,7 +81,7 @@ class CartCard extends StatelessWidget {
                     product.title,
                     maxLines: 1,
                     overflow:TextOverflow.ellipsis ,
-                    style: TextStyle( fontSize: 17),
+                    style: const TextStyle( fontSize: 17),
                   ),
                   CartPageQuantityCounter(
                       getQuantity: (value, description,index) {
@@ -92,7 +89,7 @@ class CartCard extends StatelessWidget {
                       },
                       quantity: product.quantity,index:index),
                   Text('Price: ${product.price.toString()}',style:TextStyle(fontSize: 17,fontWeight:FontWeight.bold)),
-                  Divider(),
+                  const Divider(),
                   Consumer<CartProvider>(
                     builder: (BuildContext context, value, Widget? child) {
                       return Text('Total: ${value.productCartList[index].price*value.productCartList[index].quantity}',style: TextStyle(fontSize: 17,fontWeight:FontWeight.bold),);
