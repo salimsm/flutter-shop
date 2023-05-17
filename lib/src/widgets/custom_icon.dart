@@ -7,7 +7,8 @@ class CustomIcon extends StatelessWidget {
   Color? iconColor=AppColor.kBlack;
   Color? cardBackgroundColor = AppColor.kBackground;
   final Function()? onTap; 
-  CustomIcon({required this.name,this.iconColor,this.cardBackgroundColor,this.onTap,Key? key}) : super(key: key);
+  final double? size;
+  CustomIcon({required this.name,this.iconColor,this.cardBackgroundColor,this.onTap,this.size,Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,7 +18,7 @@ class CustomIcon extends StatelessWidget {
           margin: const EdgeInsets.all(8),
           child: Icon(
             name,
-            size: 40,
+            size: size??40,
             color: iconColor,
           )),
     );

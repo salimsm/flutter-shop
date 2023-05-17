@@ -15,7 +15,7 @@ class DetailPage extends StatelessWidget {
   int _quantity = 1;
 
   DetailPage(this.product, {Key? key}) : super(key: key);
-  void addToCart() {
+  void addToCart(BuildContext context) {
     CartProduct newCartProduct = CartProduct(
       // product:product,
       id: product.id,
@@ -26,6 +26,7 @@ class DetailPage extends StatelessWidget {
       // itemTotalPrice: _quantity * product.price
     );
     _cartProvider.addProductToCart(newCartProduct);
+    navigateBackTo(context);
   }
 
   @override
@@ -102,23 +103,28 @@ class DetailPage extends StatelessWidget {
                         .indexWhere((item) => item.id == product.id);
 
                     if (index < 0) {
-                      return QuantityCounter(getQuantity: (quant, description) {
-                        _quantity = quant;
-                      });
+                      return Column(
+                        children: [
+                          QuantityCounter(getQuantity: (quant, description) {
+                            _quantity = quant;
+                          }),
+                          CustomButton(
+                            onPress:()=> addToCart(context),
+                            icon: Icons.shopping_cart,
+                            text: AppString.addToCart,
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                          ),
+                        ],
+                      );
                     }
                     return CartPageQuantityCounter(
-                        getQuantity: (quantity, description, index){
-                        _cartProvider.changeQuantity(product.id, description,index);
+                        getQuantity: (quantity, description, index) {
+                          _cartProvider.changeQuantity(
+                              product.id, description, index);
                         },
                         quantity: value.productCartList[index].quantity,
                         index: index);
                   },
-                ),
-                CustomButton(
-                  onPress: addToCart,
-                  icon: Icons.shopping_cart,
-                  text: AppString.addToCart,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
               ],
             ),
