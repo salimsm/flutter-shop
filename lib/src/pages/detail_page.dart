@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_10/src/widgets/cart_page_quantity_counter.dart';
 import 'package:provider/provider.dart';
 
 import '../common/common.dart';
@@ -16,14 +17,14 @@ class DetailPage extends StatelessWidget {
   DetailPage(this.product, {Key? key}) : super(key: key);
   void addToCart() {
     CartProduct newCartProduct = CartProduct(
-        // product:product,
-        id:product.id,
-        title:product.title,
-        price:product.price,
-        quantity: _quantity,
-        image: product.image,
-        // itemTotalPrice: _quantity * product.price
-        );
+      // product:product,
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      quantity: _quantity,
+      image: product.image,
+      // itemTotalPrice: _quantity * product.price
+    );
     _cartProvider.addProductToCart(newCartProduct);
   }
 
@@ -95,9 +96,24 @@ class DetailPage extends StatelessWidget {
                   descriptionTitle: AppString.description,
                   descriptionBody: product.description,
                 ),
-                QuantityCounter(getQuantity: (quant,description) {
-                  _quantity = quant;
-                }),
+                Consumer<CartProvider>(
+                  builder: (BuildContext context, value, Widget? child) {
+                    int index = value.productCartList
+                        .indexWhere((item) => item.id == product.id);
+
+                    if (index < 0) {
+                      return QuantityCounter(getQuantity: (quant, description) {
+                        _quantity = quant;
+                      });
+                    }
+                    return CartPageQuantityCounter(
+                        getQuantity: (quantity, description, index){
+                        _cartProvider.changeQuantity(product.id, description,index);
+                        },
+                        quantity: value.productCartList[index].quantity,
+                        index: index);
+                  },
+                ),
                 CustomButton(
                   onPress: addToCart,
                   icon: Icons.shopping_cart,

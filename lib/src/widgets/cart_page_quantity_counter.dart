@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'custom_icon.dart';
 
 class CartPageQuantityCounter extends StatefulWidget {
-  final Function(int,String,int) getQuantity;
+  final void Function(int,String,int) getQuantity;
   final int quantity;
   final int index;
   const CartPageQuantityCounter({required this.getQuantity,required this.quantity,required this.index, super.key});
