@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const CustomIcon(),
+                   CustomIcon(name:Icons.shopify,iconColor:AppColor.kPrimary),
                   CustomTextFormField(
                     label: 'Email',
                     suffixIcon: Icons.email,

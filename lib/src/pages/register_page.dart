@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const CustomIcon(),
+                   CustomIcon(name:Icons.shopify,iconColor:AppColor.kPrimary),
                   CustomTextFormField(
                     label: 'User Name',
                     suffixIcon: Icons.person,
