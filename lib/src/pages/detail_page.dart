@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_10/src/provider/favouriteProvider/favourite_provider.dart';
 import 'package:flutter_project_10/src/widgets/cart_page_quantity_counter.dart';
 import 'package:provider/provider.dart';
 import '../common/common.dart';
@@ -69,9 +70,15 @@ class DetailPage extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                RatingSectionCard(
-                  rate: product.rating.rate,
-                  count: product.rating.count,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RatingSectionCard(
+                      rate: product.rating.rate,
+                      count: product.rating.count,
+                    ),
+                    FavIconButton(),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
@@ -129,6 +136,49 @@ class DetailPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class FavIconButton extends StatefulWidget {
+  FavIconButton({super.key});
+
+  @override
+  State<FavIconButton> createState() => _FavIconButtonState();
+}
+
+class _FavIconButtonState extends State<FavIconButton> {
+  bool isFav = false;
+  
+  void onTap(FavouriteProvider favProvider) {
+    List<Product> list = favProvider.favProductList;
+    // TODO
+    //todo
+    isFav=!isFav;
+
+    setState(() {
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    FavouriteProvider favProvider = Provider.of<FavouriteProvider>(context,listen: false);
+    return GestureDetector(
+      onTap:()=> onTap(favProvider),
+      child: Card(
+          color: AppColor.kBackground,
+          margin: const EdgeInsets.all(8),
+          child: isFav
+              ? Icon(
+                  Icons.favorite,
+                  size: 30,
+                  color: AppColor.kPrimary,
+                )
+              : Icon(
+                  Icons.favorite_border,
+                  size: 30,
+                  color: AppColor.kPrimary,
+                )),
     );
   }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_10/src/pages/login_page.dart';
 import 'package:flutter_project_10/src/provider/cartProvider/cart_provider.dart';
+import 'package:flutter_project_10/src/provider/favouriteProvider/favourite_provider.dart';
 import 'package:provider/provider.dart';
 void main() {
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => FavouriteProvider()),
       ],
       child: const MyApp(),
     ),);
