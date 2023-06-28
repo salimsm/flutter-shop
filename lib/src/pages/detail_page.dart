@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_10/src/widgets/cart_page_quantity_counter.dart';
 import 'package:provider/provider.dart';
-
 import '../common/common.dart';
 import '../const/const.dart';
 import '../models/models.dart';
@@ -9,23 +8,23 @@ import '../provider/cartProvider/cart_provider.dart';
 import '../utils/utils.dart';
 import '../widgets/widgets.dart';
 
+// ignore: must_be_immutable
 class DetailPage extends StatelessWidget {
   final Product product;
   late CartProvider _cartProvider;
   int _quantity = 1;
 
   DetailPage(this.product, {Key? key}) : super(key: key);
-  void addToCart() {
+  void addToCart(BuildContext context) {
     CartProduct newCartProduct = CartProduct(
-      // product:product,
       id: product.id,
       title: product.title,
       price: product.price,
       quantity: _quantity,
       image: product.image,
-      // itemTotalPrice: _quantity * product.price
     );
     _cartProvider.addProductToCart(newCartProduct);
+    navigateBackTo(context);
   }
 
   @override
@@ -102,23 +101,28 @@ class DetailPage extends StatelessWidget {
                         .indexWhere((item) => item.id == product.id);
 
                     if (index < 0) {
-                      return QuantityCounter(getQuantity: (quant, description) {
-                        _quantity = quant;
-                      });
+                      return Column(
+                        children: [
+                          QuantityCounter(getQuantity: (quant, description) {
+                            _quantity = quant;
+                          }),
+                          CustomButton(
+                            onPress: () => addToCart(context),
+                            icon: Icons.shopping_cart,
+                            text: AppString.addToCart,
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                          ),
+                        ],
+                      );
                     }
                     return CartPageQuantityCounter(
-                        getQuantity: (quantity, description, index){
-                        _cartProvider.changeQuantity(product.id, description,index);
+                        getQuantity: (quantity, description, index) {
+                          _cartProvider.changeQuantity(
+                              product.id, description, index);
                         },
                         quantity: value.productCartList[index].quantity,
                         index: index);
                   },
-                ),
-                CustomButton(
-                  onPress: addToCart,
-                  icon: Icons.shopping_cart,
-                  text: AppString.addToCart,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
               ],
             ),

@@ -36,6 +36,13 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  void removeItem(CartProduct product){
+    _totalQuantity-= product.quantity;
+    _totalPrice-= (product.price*product.quantity);
+    productCartList.remove(product);
+    notifyListeners();
+  }
   void clearCartList() {
     _productCartList = [];
     _totalPrice = 0.0;

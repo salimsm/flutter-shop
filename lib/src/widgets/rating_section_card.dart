@@ -15,6 +15,7 @@ class RatingSectionCard extends StatelessWidget {
         const SizedBox(
           width: 4,
         ),
+        // ignore: unnecessary_string_escapes
         Text('\($count ratings\)',
             style: const TextStyle(color: AppColor.kRatingText)),
       ],

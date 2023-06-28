@@ -20,21 +20,20 @@ class _CartPageQuantityCounter extends State<CartPageQuantityCounter> {
     if (widget.quantity < 5) {
       widget.getQuantity(widget.quantity,'increase',widget.index);
     }
-    print('incremtn form cart page');
+    //print('incremtn form cart page');
   }
 
   void decrement() {
     if (widget.quantity > 1) {
       widget.getQuantity(widget.quantity,'decrease',widget.index);
     }
-    print('decrement form cart page');
+    //print('decrement form cart page');
 
   }
 
   @override
   Widget build(BuildContext context) {
-    // CartProvider _cartProvider = Provider.of<CartProvider>(context,listen:false);
-    print('_QuantityCounterState');
+    // CartProvider _cartProvider = Provider.of<CartProvider>(context,listen:false);    
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       CustomIcon(
         name: Icons.arrow_left,
