@@ -19,7 +19,10 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       body: Column(
         children: [
-          const CustomAppBar(title: 'Cart'),
+           CustomAppBar(title: 'Cart',trailingIcon: Icons.refresh,
+            trailingIconOnPress: () {
+              cartProvider.clearCartList();
+            },),
           Expanded(
             child: Consumer<CartProvider>(
               builder: (BuildContext context, value, Widget? child) {
