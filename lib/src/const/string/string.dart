@@ -12,4 +12,7 @@ class AppString {
   static const loading = 'Loading...';
   static const category = 'Category';
   static const description = 'Description';
+
+  // regex 
+  static RegExp emailRegEx = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 }

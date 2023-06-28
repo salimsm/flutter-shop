@@ -56,7 +56,7 @@ Widget _productList(List<Product> productList) {
             primary: false,
             itemCount: productList.length,
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 180,
+              maxCrossAxisExtent: 200,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
               mainAxisExtent: 200,

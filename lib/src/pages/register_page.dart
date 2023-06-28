@@ -54,6 +54,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter email';
                       }
+                      if (!AppString.emailRegEx.hasMatch(value)) {
+                        return 'Please enter valid email';
+                      }
                       return null;
                     },
                   ),
