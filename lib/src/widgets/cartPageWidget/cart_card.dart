@@ -21,7 +21,7 @@ class CartCard extends StatelessWidget {
     void removeItemFromCart(CartProduct prod){
       cartProvider.removeItem(prod);
     }
-
+    print('card');
     return Card(
       child: Row(
         children: [

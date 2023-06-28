@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_10/src/provider/cartProvider/cart_provider.dart';
 import 'package:provider/provider.dart';
+import '../const/const.dart';
+
 
 import 'pages.dart';
 
@@ -39,20 +41,23 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     top: 0,
                     child: Consumer<CartProvider>(
                       builder: (BuildContext context, value, Widget? child) {
+                        if(value.totalQuantity==0) {return SizedBox();}else{
                         return Container(
                           decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: AppColor.kPrimary,
                           borderRadius: BorderRadius.circular(50),
                           // padding:EdgeInsets.all(4)
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(3.0),
+                            padding: const EdgeInsets.symmetric(horizontal:6.0,vertical: 3),
                             child: Text(
                               value.totalQuantity.toString(),
-                              // style: TextStyle(backgroundColor: Colors.blue),
+                              style: TextStyle(color: AppColor.kWhite),
                             ),
                           ),
-                        );
+                        );  
+                        }
+                        
                       },
                     ))
               ]),

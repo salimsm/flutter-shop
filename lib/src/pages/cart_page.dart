@@ -33,27 +33,19 @@ class _CartPageState extends State<CartPage> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Consumer<CartProvider>(
-                  builder: (BuildContext context, value, Widget? child) {
-                    return Text(
-                        'Total Price: ${value.totalPrice.toStringAsFixed(3)}',
-                        style: const TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold));
-                  },
-                ),
-                CustomButton(
+          Consumer<CartProvider>(
+            builder: (BuildContext context, value, Widget? child) {
+              return Text(
+                  'Total Price: ${value.totalPrice.toStringAsFixed(3)}',
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.bold));
+            },
+          ),
+          CustomButton(
                   onPress: () => {cartProvider.clearCartList()},
                   text: 'Checkout',
-                  width: 200,
+                  //width: 200,
                 ),
-              ],
-            ),
-          ),
         ],
       ),
     );
